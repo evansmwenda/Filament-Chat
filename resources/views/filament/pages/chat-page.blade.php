@@ -1,5 +1,5 @@
 <x-filament::page>
-    <div class="flex h-full">
+<div class="flex h-full">
         <div class="w-1/4 border-r">
             <livewire:ChatList/>
         </div>
