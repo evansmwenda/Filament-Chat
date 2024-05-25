@@ -1,15 +1,11 @@
 <x-filament::page>
-    <div class="flex h-full" style="background-color: red;">
-        <!-- Contacts List -->
-        <div class="w-1/4  border-r h-full">
-           
-            <p>conversation list here</p>
+    <div class="flex h-full">
+        <div class="w-1/4 border-r">
+            <livewire:ChatList/>
         </div>
-        
-        <!-- Chat Window -->
-        <div class="w-3/4 h-full">
-            
-            <p>chat window here</p>
+        <div class="w-3/4">
+            <livewire:ChatWindow/>
         </div>
     </div>
 </x-filament::page>
+
