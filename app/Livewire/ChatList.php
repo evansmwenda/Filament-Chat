@@ -31,6 +31,7 @@ class ChatList extends Component
 
     public function selectConversation($conversationId)
     {
-        $this->dispatch('conversationSelected', ['conversationId' => $conversationId]);
+        $conversation = Conversation::findOrFail($conversationId);
+        $this->dispatch('conversationSelected', ['conversation' => $conversation]);
     }
 }

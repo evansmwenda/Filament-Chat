@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ChatWindow extends Component
 {
-    public $conversationId;
+    public $conversation;
     public $messages;
     public $messageText;
 
@@ -16,12 +16,10 @@ class ChatWindow extends Component
     public function loadMessages($payload)
     {
         $userId = auth()->id();
-        $this->conversationId = $payload['conversationId'];
-
-        // dd($this->conversationId);
+        $this->conversation = $payload['conversation'];
 
         #get count
-        $count = Message::where('conversation_id', $this->conversationId)    
+        $count = Message::where('conversation_id', $this->conversation['id'])    
             ->where(function ($query) use($userId) {
                 $query->where('sender_id', $userId)
                     ->orWhere('receiver_id', $userId);
@@ -29,7 +27,7 @@ class ChatWindow extends Component
             ->count();
 
         #skip and query
-        $this->messages = Message::where('conversation_id', $this->conversationId)
+        $this->messages = Message::where('conversation_id', $this->conversation['id'])
             ->where(function ($query) use($userId) {
                 $query->where('sender_id', $userId)
                     ->orWhere('receiver_id', $userId);
@@ -45,11 +43,14 @@ class ChatWindow extends Component
     public function sendMessage()
     {
         \App\Models\Message::create([
-            'contact_id' => $this->contactId,
-            'text' => $this->messageText,
+            'conversation_id' => $this->conversation['id'],
+            'message' => $this->messageText,
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $this->conversation['receiver_id'],
         ]);
         $this->messageText = '';
-        $this->loadMessages($this->contactId);
+        $data['conversation'] = $this->conversation;
+        $this->loadMessages($data);
     }
 
     public function render()

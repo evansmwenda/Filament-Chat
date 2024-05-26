@@ -1,5 +1,5 @@
 <div>
-    @if($conversationId)
+    @if($conversation)
         <div class="messages">
             @foreach($messages as $message)
                 <div>{{ $message->message }}</div>

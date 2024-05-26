@@ -3,6 +3,7 @@
         <div class="w-1/4 border-r">
             <livewire:ChatList/>
         </div>
+        
         <div class="w-3/4">
             <livewire:ChatWindow/>
         </div>
