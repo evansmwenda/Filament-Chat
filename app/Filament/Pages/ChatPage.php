@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use Filament\Facades\Filament;
 use Filament\Pages\Page;
 
 class ChatPage extends Page
@@ -14,4 +15,8 @@ class ChatPage extends Page
     protected static ?string $navigationLabel = 'Chats';
 
     protected static ?string $slug = 'chats';
+
+    // protected static string $layout = 'components.layouts.app';
+    
+    protected static ?string $title = '';
 }
