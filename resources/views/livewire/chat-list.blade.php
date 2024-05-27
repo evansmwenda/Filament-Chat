@@ -1,4 +1,19 @@
-<div class="flex flex-col h-full w-full">
+<div
+x-init="
+
+
+
+ Echo.private('users.{{Auth()->User()->id}}')
+ .notification((notification)=>{
+     if(notification['type']== 'App\\Notifications\\MessageRead'||notification['type']== 'App\\Notifications\\MessageSent')
+     {
+
+         window.Livewire.dispatch('refresh');
+     }
+ });
+
+"
+class="flex flex-col h-full w-full">
     <header class="px-3 z-10 bg-white sticky top-0 py-1 w-full">
         <div class="border-b justify-between flex items-center pb-2">
             <div class="flex items-center gap-2">
@@ -10,7 +25,7 @@
     <main class="overflow-y-scroll overflow-hidden grow w-full" style="contain:content">
         <ul class="p-2 grid w-full space-y-2">
             @if ($conversations)
-                @foreach ($conversations as $key => $conversation)
+                @foreach (collect($conversations)->sortByDesc('updated_at') as $key => $conversation)
                     <li wire:click="selectConversation({{ $conversation->id }})"
                         class="py-3 hover:bg-gray-300 rounded-2xl dark:hover:bg-gray-700/70 transition-colors duration-150 flex gap-4 relative w-full cursor-pointer px-2 {{ $conversation->id == $selectedConversation?->id ? 'bg-gray-200/70':'' }}">
                         <!-- Your list item content here -->

@@ -63,6 +63,23 @@ class ChatWindow extends Component
         $this->loadMessages($data);
 
         $this->dispatch('scroll-bottom');
+
+        //update conversation model
+        $this->conversation->updated_at = now();
+        $this->conversation->save();
+
+
+        //refresh chatlist
+        $this->dispatch('refresh')->to('chat-list');
+
+        // broadcast notification now
+        // $this->selectedConversation->getReceiver()
+        //     ->notify(new MessageSent(
+        //         Auth()->User(),
+        //         $createdMessage,
+        //         $this->selectedConversation,
+        //         $this->selectedConversation->getReceiver()->id
+        //     ));
     }
 
     public function render()

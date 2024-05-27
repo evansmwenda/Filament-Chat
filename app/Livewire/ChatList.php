@@ -11,6 +11,7 @@ class ChatList extends Component
     public $query;
     public $conversations;
     public $selectedConversation;
+    protected $listeners=['refresh'=>'$refresh'];
 
     public function mount()
     {
