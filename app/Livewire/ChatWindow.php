@@ -38,6 +38,9 @@ class ChatWindow extends Component
             // ->take($this->paginate_var)
             ->get();
 
+            //scroll to bottom
+            $this->dispatch('scroll-bottom');
+
 
         return $this->messages;
     }
@@ -58,6 +61,8 @@ class ChatWindow extends Component
         $this->messageText = '';
         $data['conversation'] = $this->conversation;
         $this->loadMessages($data);
+
+        $this->dispatch('scroll-bottom');
     }
 
     public function render()
