@@ -44,9 +44,11 @@ class ChatWindow extends Component
 
     public function sendMessage()
     {
-        $this->validate(['messageText' => 'required|min:3']);
+        if(strlen(trim($this->messageText)) < 3){
+            return ;
+        }
 
-
+        
         \App\Models\Message::create([
             'conversation_id' => $this->conversation->id,
             'message' => $this->messageText,

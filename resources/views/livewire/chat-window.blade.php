@@ -79,7 +79,7 @@
                 type="text" 
                 wire:model="messageText"
                 wire:keydown.enter="sendMessage"
-                class="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
+                class="flex-grow p-2 bg-gray-100 border-0 outline-0 focus:border-0 focus:ring-0 hover:ring-0 rounded-lg  focus:outline-none"
                 autocomplete="off"
                 autofocus
                 maxlength="1700"
@@ -87,8 +87,8 @@
                 placeholder="Type your message..."/>
             <button
              wire:click="sendMessage"
-             @if(empty($messageText)) disabled @endif
-             class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
+             class="px-6 py-2  text-black-900 rounded-lg  focus:outline-none focus:ring-0">Send</button>
+             @error('messageText') <span class="text-red-500">{{ $message }}</span> @enderror
         </div>
 
     @else
