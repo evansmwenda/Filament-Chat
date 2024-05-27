@@ -10,6 +10,7 @@ class ChatWindow extends Component
 {
     public $conversation;
     public $messages;
+
     public $messageText;
 
     protected $listeners = ['conversationSelected' => 'loadMessages'];
@@ -43,6 +44,9 @@ class ChatWindow extends Component
 
     public function sendMessage()
     {
+        $this->validate(['messageText' => 'required|min:3']);
+
+
         \App\Models\Message::create([
             'conversation_id' => $this->conversation->id,
             'message' => $this->messageText,

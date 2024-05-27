@@ -78,12 +78,17 @@
             <input 
                 type="text" 
                 wire:model="messageText"
+                wire:keydown.enter="sendMessage"
                 class="flex-grow p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
                 autocomplete="off"
                 autofocus
                 maxlength="1700"
+                required
                 placeholder="Type your message..."/>
-            <button wire:click="sendMessage" class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
+            <button
+             wire:click="sendMessage"
+             @if(empty($messageText)) disabled @endif
+             class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Send</button>
         </div>
 
     @else
