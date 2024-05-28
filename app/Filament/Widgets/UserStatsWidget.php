@@ -17,4 +17,9 @@ class UserStatsWidget extends BaseWidget
             ->descriptionIcon('heroicon-m-arrow-trending-up'),
         ];
     }
+
+    public static function canView(): bool 
+    {
+        return !(auth()->user()->is_admin);
+    }
 }
