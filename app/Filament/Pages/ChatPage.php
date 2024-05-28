@@ -13,6 +13,7 @@ class ChatPage extends Page
     protected static string $view = 'filament.pages.chat-page';
 
     protected static ?string $navigationLabel = 'Chats';
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $slug = 'chats';
 

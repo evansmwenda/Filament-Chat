@@ -18,11 +18,7 @@ class ChatList extends Component
         $user = auth()->user();
         // $this->conversations= Conversation::where('sender_id',$user->id)->orWhere('receiver_id',$user->id)->get();
         $this->conversations = $user->conversations()->latest('updated_at')->get();
-       //set unread messages in conversation thread of current user as read
-    //    Message::where('conversation_id',$this->selectedConversation->id)
-    //         ->where('receiver_id',auth()->id())
-    //         ->whereNull('read_at')
-    //         ->update(['read_at'=>now()]);
+       
     }
 
 
@@ -35,6 +31,13 @@ class ChatList extends Component
     {
         $conversation = Conversation::findOrFail($conversationId);
         $this->selectedConversation = $conversation;
+
+        Message::where('conversation_id',$this->selectedConversation->id)
+        ->where('receiver_id',auth()->id())
+        ->whereNull('read_at')
+        ->update(['read_at'=>now()]);
+
+
         $this->dispatch('conversationSelected', ['conversation' => $conversation]);
     }
 }

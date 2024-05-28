@@ -1,14 +1,10 @@
 <div
 x-init="
-
-
-
  Echo.private('users.{{Auth()->User()->id}}')
  .notification((notification)=>{
      if(notification['type']== 'App\\Notifications\\MessageRead'||notification['type']== 'App\\Notifications\\MessageSent')
      {
-
-         window.Livewire.dispatch('refresh');
+        window.Livewire.dispatch('refresh');
      }
  });
 
@@ -41,6 +37,8 @@ class="flex flex-col h-full w-full">
                             {{-- Message body --}}
                             <div class="col-span-12 flex gap-x-2 items-center">
 
+                                    
+
                                 @if ($conversation->messages?->last()?->sender_id==auth()->id())
                                     @if ($conversation->isLastMessageReadByUser())
                                             <!-- double tick -->
@@ -60,6 +58,7 @@ class="flex flex-col h-full w-full">
                                         </span>
                                             
                                     @endif
+                                    
                                 @endif
 
                                 <p class="grow truncate text-sm font-[100]">
@@ -68,9 +67,9 @@ class="flex flex-col h-full w-full">
 
                                 <!-- unread count ONLY if we are the receiver-->
                                 @if ($conversation->messages?->last()?->sender_id != auth()->id())
-                                    @if ($conversation->unreadMessagesCount()>0)
+                                    @if ($conversation->unreadMessagesCount())
                                     <span class="font-bold p-px px-2 text-xs shrink-0 rounded-full bg-blue-500 text-white">
-                                        {{$conversation->unreadMessagesCount()}}
+                                       {{$conversation->unreadMessagesCount()}}
                                     </span>
                                         
                                     @endif

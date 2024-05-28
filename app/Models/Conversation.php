@@ -32,9 +32,13 @@ class Conversation extends Model
     //get count of unready messages in conversation
     public  function unreadMessagesCount()
     {
-        return $unreadMessages= Message::where('conversation_id','=',$this->id)
+        $unreadMessages= Message::where('conversation_id','=',$this->id)
         ->where('receiver_id',auth()->user()->id)
         ->whereNull('read_at')->count();
+
+        // dd($unreadMessages);
+
+        return $unreadMessages;
     }
 
     //check if latest message is read
