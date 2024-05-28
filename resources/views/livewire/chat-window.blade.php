@@ -13,7 +13,6 @@
             .notification((notification)=>{
                 if(notification['type']== 'App\\Notifications\\MessageRead' && notification['conversation_id']== {{$this->conversation?->id}})
                 {
-
                     markAsRead=true;
                 }
             });
